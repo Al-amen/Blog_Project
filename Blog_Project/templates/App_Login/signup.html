@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
-{% block title_block %}Crea A New Account{% endblock title_block %}
+{% block block_title %}Create a new account{% endblock block_title %}
 
 {% block block_body %}
 {% load crispy_forms_tags %}
     {% if register %}
 
     <div class="alert alert-success">
-        Account is created successfully. <a href="">Login here</a>
+        Account is created successfully. <a href="{% url 'App_Login:login' %}">Login here</a>
     </div>
 
     {% else %}
@@ -18,7 +18,10 @@
         {{ form | crispy }}
         <button type="submit" class="btn btn-success btn-sm">Create an Account</button>
     </form>
+    <br>
+    <p>Already have an account ? <a href="{% url 'App_Login:login' %}">Login here</a></p>
 
     {% endif %}
+ 
 
 {% endblock block_body %}

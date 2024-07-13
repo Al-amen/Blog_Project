@@ -35,9 +35,19 @@
                   <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home Page</a>
                   </li>
+                  {% if user.is_authenticated %}
+                  <li class="nav-item">
+                    <a class="nav-link " aria-current="page" href="{% url 'App_Login:logout' %}">Logout</a>
+                  </li>
+                  {% else %}
                   <li class="nav-item">
                     <a class="nav-link " aria-current="page" href="{% url 'App_Login:signup' %}">Signup</a>
                   </li>
+                  <li class="nav-item">
+                    <a class="nav-link " aria-current="page" href="{% url 'App_Login:login' %}">Login</a>
+                  </li>
+                  {% endif %}
+                
                  
                     
                 
