@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <title>
-            {% block title_block %}Blog{% endblock title_block %}
+            {% block block_title %}Blog{% endblock block_title %}
         </title>
         <!-- Required meta tags -->
         <meta charset="utf-8" />
@@ -35,6 +35,9 @@
                   <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home Page</a>
                   </li>
+                  <li class="nav-item">
+                    <a class="nav-link " aria-current="page" href="{% url 'App_Login:signup' %}">Signup</a>
+                  </li>
                  
                     
                 
@@ -43,7 +46,7 @@
           </nav>
 
           
-        <div class="container">
+        <div class="container" style = "padding:20px">
             {% block block_body %}
                 
             {% endblock block_body %}
