@@ -1,73 +1,60 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>
-            {% block block_title %}Blog{% endblock block_title %}
-        </title>
-        <!-- Required meta tags -->
-        <meta charset="utf-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
-
-        <!-- Bootstrap CSS v5.2.1 -->
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-            crossorigin="anonymous"
-        />
-        
-        {% block css %}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  {% block css %}
             
-        {% endblock css %}
-            
-    </head>
+  {% endblock css %}
+  <title>
+    {% block block_title %}Blog{% endblock block_title %}
+</title>
+</head>
+<body>
 
-    <body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      
      
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-            
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
-                  </li>
-                  {% if user.is_authenticated %}
-                  <li class="nav-item">
-                    <a class="nav-link " aria-current="page" href="{% url 'App_Login:logout' %}">Logout</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link " aria-current="page" href="{% url 'App_Login:profile' %}">Profile</a>
-                  </li>
-                  {% else %}
-                  <li class="nav-item">
-                    <a class="nav-link " aria-current="page" href="{% url 'App_Login:signup' %}">Signup</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link " aria-current="page" href="{% url 'App_Login:login' %}">Login</a>
-                  </li>
-                  {% endif %}
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="navbar-brand nav-link" href="{% url 'index' %}"><img src="/media/profile_pics/blog.jpg" width="30px" class="rounded-circle" alt="" srcset=""></a>
+          </li>
+          {% if user.is_authenticated %}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                @{{user.username}}
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                <li><a class="dropdown-item nav-link" href="{% url 'App_Login:profile' %}">Profile</a></li>
+                <li><a class="dropdown-item nav-link" href="{% url 'App_Blog:create_blog' %}">Write Blog</a></li>
+                <hr>
+                <li><a class="dropdown-item nav-link" href="{% url 'App_Login:logout' %}">Logout</a></li>
                 
-                 
-                    
-                
-              </div>
-            </div>
-          </nav>
-
-          
-        <div class="container" style = "padding:20px">
-            {% block block_body %}
-                
-            {% endblock block_body %}
-        </div>
-            
+              </ul>
+            </li>
+          {% else %}
+            <li><a class="dropdown-item text-white bg-dark nav-link" href="{% url 'App_Login:signup' %}">SignUp</a></li>
+            <li><a class="dropdown-item text-white bg-dark nav-link" href="{% url 'App_Login:login' %}">Login</a></li>
+          {% endif %}
          
-                
-       
-    </body>
-</html>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
+  <div class="container" style = "padding:20px">
+    {% block block_body %}
+        
+    {% endblock block_body %}
+</div>
+    
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
