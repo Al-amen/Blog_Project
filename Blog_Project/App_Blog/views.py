@@ -11,9 +11,6 @@ import uuid
 # Create your views here.
 
 
-def index(request):
-    
- return render (request, "App_Blog/blog_list.html" , context={})
 
 
 class CreateBlog(LoginRequiredMixin,CreateView):
@@ -22,7 +19,7 @@ class CreateBlog(LoginRequiredMixin,CreateView):
     fields = ('blog_title','blog_content','blog_image')
 
 
-    def form_valid(self, form):
+    def form_valid(self,  form):
         blog_obj = form.save(commit=False)
         blog_obj.author = self.request.user
         title = blog_obj.blog_title
@@ -31,3 +28,8 @@ class CreateBlog(LoginRequiredMixin,CreateView):
         return HttpResponseRedirect(reverse('index'))
         
     
+class BlogList(ListView):
+    model = models.Blog
+    context_object_name = 'blogs'
+    template_name='App_blog/blog_list.html'
+    # queryset = models.Blog.objects.order_by('-publish_date')

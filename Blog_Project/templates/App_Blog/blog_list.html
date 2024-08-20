@@ -1,8 +1,26 @@
 {% extends 'base.html' %}
-
+{% load custom_filters %}
 {% block block_title %}Home{% endblock block_title %}
 
 
 {% block block_body %}
-    <h1>Im from home page</h1>
+    
+    {% for blog in blogs  %}
+      <h3>{{blog.blog_title}}</h3>
+      <h6><i>{{blog.publish_date}}</i></h6>
+        <div class="row">
+            <div class="col-sm-4">
+                <img src="/media/{{blog.blog_image}}" alt="{{blog.blog_image}}" title='{{blog.blog_title}}' width = '100%'>
+            </div>
+            <div class="col-sm-8">
+                <p>{{blog.blog_content|range_filter|linebreaks}}</p>
+                <h6>Posted by : <a href="#">@{{blog.author}}</a></h6>
+            </div>
+            
+        </div>
+
+        <hr>
+        
+    {% endfor %}
+        
 {% endblock block_body %}
