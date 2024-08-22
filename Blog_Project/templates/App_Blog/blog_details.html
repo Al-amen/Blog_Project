@@ -1,14 +1,46 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
+
 {% block css %}
-    
 {% endblock css %}
-    
 
 {% load crispy_forms_tags %}
-{% block block_title %}Blog details{% endblock block_title %}
+{% block block_title %}{{ blog.blog_title }}{% endblock block_title %}
 
 {% block block_body %}
-    
-
+    <div class="row">
+        <div class="col-sm-6">
+            <h2>{{ blog.blog_title }}</h2>
+            <h4>{{ blog.author }}</h4>
+            <i><h6>Publish date : {{ blog.publish_date }}</h6></i>
+            <i><h6>Update date: {{ blog.update_date }}</h6></i>
+        </div>
+        <div class="col-sm-6">
+            <img src="/media/{{ blog.blog_image }}" alt="{{ blog.blog_title }}" title="{{ blog.blog_title }}" width="100%">
+        </div>
+        <p>{{ blog.blog_content | linebreaks }}</p>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <hr>
+            <h4>Comments</h4>
+            {% for comment in blog.blog_comment.all %}
+                <p>
+                    <a href="{% url 'App_Login:profile' username=comment.user.username %}">
+                        {{ comment.user.username }}
+                    </a>
+                    {{ comment.comment }} <br>
+                    <h6>{{ comment.comment_date }}</h6>
+                </p>
+            {% endfor %}
+        </div>
+        <div class="col-sm-6">
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{ comment_form|crispy }}
+                <button type="submit" class="btn btn-sm btn-primary">Comment</button>
+            </form>
+        </div>
+    </div>
 {% endblock block_body %}

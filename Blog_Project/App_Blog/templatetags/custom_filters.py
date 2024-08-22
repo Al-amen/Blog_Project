@@ -5,3 +5,7 @@ register = template.Library()
 def range_filter(value):
     
     return value[0:500] + '.....'
+
+
+ 
+

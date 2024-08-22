@@ -13,7 +13,8 @@
                 <img src="/media/{{blog.blog_image}}" alt="{{blog.blog_image}}" title='{{blog.blog_title}}' width = '100%'>
             </div>
             <div class="col-sm-8">
-                <p>{{blog.blog_content|range_filter|linebreaks}}</p>
+                
+                <p>{{blog.blog_content|range_filter|linebreaks}} <a href="{% url 'App_Blog:blog_details' slug=blog.slug %}">Read More</a></p>
                 <h6>Posted by : <a href="#">@{{blog.author}}</a></h6>
             </div>
             
