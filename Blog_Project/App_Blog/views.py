@@ -35,10 +35,13 @@ class BlogList(ListView):
     context_object_name = 'blogs'
     template_name='App_blog/blog_list.html'
     # queryset = models.Blog.objects.order_by('-publish_date')
-    
-    
-@login_required
 
+
+class MyBlog(LoginRequiredMixin,TemplateView):
+    template_name = "App_Blog/my_blog.html"
+
+   
+@login_required
 def blog_details(request,slug):
     
      blog = models.Blog.objects.get(slug=slug)
@@ -88,6 +91,13 @@ def unliked(request,pk):
     return  HttpResponseRedirect(reverse('App_Blog:blog_details',kwargs={'slug':blog.slug} ))
     
     
-        
-    
+
+class BlogUpdateView(LoginRequiredMixin,UpdateView):
+    model = models.Blog
+    fields = ('blog_title','blog_content','blog_image')
+    template_name = "App_Blog/edit_blog.html"
+      
+    def get_success_url(self, **kwargs):
+       
+        return reverse_lazy('App_Blog:blog_details', kwargs={'slug': self.object.slug})
     

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+{% load static %}
+{% block css %}
+
+{% endblock %}
+
+{% load crispy_forms_tags %}
+{% block block_title %}
+  {{blog.blog_title}}
+{% endblock %}
+
+{% block block_body %}
+  {% if blog.author == user %}
+  <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form|crispy}}
+    <button type="submit" class = "btn btn-info btn-sm">Update</button>
+  </form>
+  {% else %}
+     <p>You are not allowed to view this page. 404</p>
+  {% endif %}
+
+{% endblock %}
