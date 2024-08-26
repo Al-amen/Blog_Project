@@ -15,19 +15,31 @@
             <h4>{{ blog.author }}</h4>
             <i><h6>Publish date : {{ blog.publish_date }}</h6></i>
             <i><h6>Update date: {{ blog.update_date }}</h6></i>
+            <h6>{{blog.liked_blog.count}} Likes | {{blog.blog_comment.count}} Comments</h6>
         </div>
         <div class="col-sm-6">
             <img src="/media/{{ blog.blog_image }}" alt="{{ blog.blog_title }}" title="{{ blog.blog_title }}" width="100%">
         </div>
         <p>{{ blog.blog_content | linebreaks }}</p>
+
+        <hr>
     </div>
+    {% if not liked %}
+        <a href="{% url 'App_Blog:liked_post' pk=blog.pk %}"><i class="fa-sharp fa-regular fa-2x fa-thumbs-up"></i></a>
+    {% else %}
+       <a href="{% url 'App_Blog:unliked_post' pk=blog.pk %}"><i class="fa-sharp fa-regular fa-2x fa-thumbs-down"></i></a>
+    {% endif %}
+ 
+
+   
+
     <div class="row">
         <div class="col-sm-6">
             <hr>
             <h4>Comments</h4>
             {% for comment in blog.blog_comment.all %}
                 <p>
-                    <a href="{% url 'App_Login:profile' username=comment.user.username %}">
+                    <a href="#">
                         {{ comment.user.username }}
                     </a>
                     {{ comment.comment }} <br>

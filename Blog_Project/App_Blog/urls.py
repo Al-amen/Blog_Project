@@ -7,6 +7,8 @@ urlpatterns = [
     path('blog_list',views.BlogList.as_view() , name= 'blog_list'),
     path('write/',views.CreateBlog.as_view(), name='create_blog'),
     path('details/<str:slug>', views.blog_details, name='blog_details'),
-    path('app_login',include('App_Login.urls'))
+    path('liked/<pk>',views.liked, name="liked_post"),
+    path('unliked/<pk>',views.unliked, name="unliked_post")
+    
     
 ]
